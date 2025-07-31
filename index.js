@@ -40,7 +40,7 @@ db.connect()
   })
   .catch((err) => {
     console.error("Database connection failed:", err.message);
-    console.log("Application will continue without database connection");
+  
     console.log("Please install and start PostgreSQL to enable full functionality");
   }); 
 
@@ -195,7 +195,7 @@ app.post('/payment', async(req, res) => {
     })
     .then(customer => {
         return stripe.charges.create({
-            amount: result.rows[0].fee*100, // Amount in cents
+            amount: result.rows[0].fee*100,
             description: result.rows[0].event_name,
             currency: 'USD',
             customer: customer.id
@@ -225,17 +225,17 @@ app.post('/privatesubmit', upload.single('guest_list'), async (req, res) => {
         var p='private';
         var result =await db.query("insert into eventsinfo (user_id, date_and_time, event_name, event_description, location, event_type, private_public, event_poster) values ($1, $2, $3, $4, $5, $6, $7, $8) returning event_id;",[u_id, data.date_and_time, data.event_type, data.event_type, data.venue, data.event_type, p, data.event_poster]);
         var event_id = result.rows[0].event_id;
-        // Read the file buffer
+      
         const workbook = XLSX.read(req.file.buffer, { type: 'buffer' });
         
-        // Get the first sheet's data
+       
         const sheetName = workbook.SheetNames[0];
         const sheet = workbook.Sheets[sheetName];
         const data1 = XLSX.utils.sheet_to_json(sheet);
         for(var i=0;i<data1.length;i++){
             var result2 = await db.query("insert into guestlistinfo (user_id, event_id,guest_email, guest_name) values ($1, $2, $3, $4);", [u_id, event_id, data1[i].EmailId, data1[i].Name]);
         }
-        // Respond with processed data or a success message
+       
         res.redirect("/myevents");
     } catch (error) {
         console.error('Error processing file:', error);
