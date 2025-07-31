@@ -1,7 +1,23 @@
-.env
-
-database_setup.sql
-
+# Dependency directory
 node_modules/
 
-README.md
+# Environment variables
+.env
+
+# Local database setup file (optional to ignore)
+database_setup.sql
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+
+# System/editor files
+.DS_Store
+.vscode/
+.idea/
+
+# Build artifacts (optional)
+dist/
+build/
+coverage/
