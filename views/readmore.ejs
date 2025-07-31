@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Details</title>
+    <link rel="stylesheet" href="readmore.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav  class="stroke">
+        <ul>
+          <li><a href="/home" class="active">Home</a></li>
+          <li><a href="/organise">Organise an Event</a></li>
+          <li><a href="/myevents">My Events</a></li>
+          <li><a href="/mybookings">My Bookings</a></li>
+          <a href="/login"><button class="glow-on-hover" type="submit" formaction="/login" >Log Out</button></a>          
+        </ul>
+    </nav>
+    <!-- Cards for Event Event Description -->
+    <div class="container">
+        <div class="event-card">
+            <img src="<%=event.event_poster%>" alt="Event Poster" class="event-poster">
+            <h1 class="event-title">Event Title</h1>
+            <p class="event-description"><%=event.event_description%></p>
+            <div class="event-details">
+                <div class="detail-item">
+                    <strong>Location:</strong> <%=event.location%>
+                </div>
+                <div class="detail-item">
+                    <strong>Date and Time:</strong> <%=event.date_and_time%>
+                </div>
+                <div class="detail-item">
+                    <strong>Fee:</strong> $<%=event.fee%>
+                </div>
+                <div class="detail-item">
+                    <strong>Type:</strong> <%=event.event_type%>
+                </div>
+            </div>
+            <form method="post" action="/bookTickets">
+                <button name="id" value="<%=event.event_id%>">Book Tickets</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

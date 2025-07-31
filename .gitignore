@@ -1,0 +1,7 @@
+.env
+
+database_setup.sql
+
+node_modules/
+
+README.md

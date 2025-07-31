@@ -1,0 +1,266 @@
+  /* Navbar */
+  nav {
+    width: 80%;
+    margin: 0 auto;
+    background: #fff;
+    padding: 3px 0;
+    
+  }
+  nav ul {
+    list-style: none;
+    text-align: center;
+  }
+  nav ul li {
+    display: inline-block;
+  }
+  nav ul li a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: #3e3c3caa;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 10px;
+  }
+  nav ul li a,
+  nav ul li a:after,
+  nav ul li a:before {
+    transition: all .5s;
+  }
+  nav ul li a:hover {
+    color: black;
+  }
+  
+  
+  /* stroke */
+  nav.stroke ul li a,
+  nav.fill ul li a {
+    position: relative;
+  }
+  nav.stroke ul li a:after,
+  nav.fill ul li a:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 0%;
+    content: '.';
+    color: transparent;
+    background: #aaa;
+    height: 1px;
+  }
+  nav.stroke ul li a:hover:after {
+    width: 100%;
+  }
+  
+  nav.fill ul li a {
+    transition: all 2s;
+  }
+  
+  nav.fill ul li a:after {
+    text-align: left;
+    content: '.';
+    margin: 0;
+    opacity: 0;
+  }
+  nav.fill ul li a:hover {
+    color: #fff;
+    z-index: 1;
+  }
+  nav.fill ul li a:hover:after {
+    z-index: -10;
+    animation: fill 1s forwards;
+    -webkit-animation: fill 1s forwards;
+    -moz-animation: fill 1s forwards;
+    opacity: 1;
+  }
+  
+  /* Circle */
+  nav.circle ul li a {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  nav.circle ul li a:after {
+    display: block;
+    position: absolute;
+    margin: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: '.';
+    color: transparent;
+    width: 1px;
+    height: 1px;
+    border-radius: 50%;
+    background: transparent;
+  }
+  nav.circle ul li a:hover:after {
+    -webkit-animation: circle 1.5s ease-in forwards;
+  }
+  
+  /* SHIFT */
+  nav.shift ul li a {
+    position:relative;
+    z-index: 1;
+  }
+  nav.shift ul li a:hover {
+    color: #91640F;
+  }
+  nav.shift ul li a:after {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    height: 1px;
+    content: '.';
+    color: transparent;
+    background: #F1C40F;
+    visibility: none;
+    opacity: 0;
+    z-index: -1;
+  }
+  nav.shift ul li a:hover:after {
+    opacity: 1;
+    visibility: visible;
+    height: 100%;
+  }
+  .stroke ul button{
+      margin-left: 300px;
+      margin-right: 0px;
+  }
+  nav ul li a.active {
+      color: black; /* Highlight color for the active page */
+      border-bottom: 2px solid #91640F; /* Optional: underline to indicate the active page */
+    }
+  /* Log Out Button */
+  .glow-on-hover {
+      width: 120px;
+      height: 45px;
+      border: none;
+      outline: none;
+      color: #fff;
+      background: #111;
+      cursor: pointer;
+      position: relative;
+      z-index: 0;
+      border-radius: 10px;
+  }
+  
+  .glow-on-hover:before {
+      content: '';
+      background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+      position: absolute;
+      top: -2px;
+      left:-2px;
+      background-size: 400%;
+      z-index: -1;
+      filter: blur(5px);
+      width: calc(100% + 4px);
+      height: calc(100% + 4px);
+      animation: glowing 20s linear infinite;
+      opacity: 0;
+      transition: opacity .3s ease-in-out;
+      border-radius: 10px;
+  }
+  
+  .glow-on-hover:active {
+      color: #000
+  }
+  
+  .glow-on-hover:active:after {
+      background: transparent;
+  }
+  
+  .glow-on-hover:hover:before {
+      opacity: 1;
+  }
+  
+  .glow-on-hover:after {
+      z-index: -1;
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #111;
+      left: 0;
+      top: 0;
+      border-radius: 10px;
+  }
+  
+  @keyframes glowing {
+      0% { background-position: 0 0; }
+      50% { background-position: 400% 0; }
+      100% { background-position: 0 0; }
+  }
+  /* Form */
+  form {
+    background: #ffffff; /* White background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+  }
+  
+  form input[type="text"],
+  form input[type="file"],
+  form select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #000000; /* Black border */
+    border-radius: 5px;
+    font-size: 1em;
+    width: 100%;
+    background-color: #f9f9f9; /* Very light gray background */
+  }
+  
+  form select {
+    background-color: #ffffff; /* White background for select dropdown */
+    cursor: pointer;
+  }
+  
+  form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #000000; /* Black text */
+  }
+  
+  form input[type="file"] {
+    padding: 0;
+  }
+  
+  form input[type="text"]:focus,
+  form input[type="file"]:focus,
+  form select:focus {
+    border-color: #333333; /* Darker black border on focus */
+    outline: none;
+    box-shadow: 0 0 5px rgba(51, 51, 51, 0.5); /* Light black shadow on focus */
+  }
+  
+  form input[type="submit"] {
+    background: #000000; /* Black background */
+    color: #ffffff; /* White text */
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.3s;
+    margin-top: 15px; /* Margin to separate from file input */
+  }
+  
+  form input[type="submit"]:hover {
+    background: #333333; /* Darker black on hover */
+  }
+  

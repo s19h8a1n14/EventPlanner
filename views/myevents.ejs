@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Events</title>
+    <link rel="stylesheet" href="myevents.css">
+    <style>
+        /* Modal Container */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto; /* Centered and with some margin from the top */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 600px; /* Max width for larger screens */
+}
+
+/* Close Button */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: #333;
+}
+
+/* Form Elements */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 16px;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input[type="text"], input[type="number"], textarea {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.modal button[type="submit"] {
+    background-color: black;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal button[type="submit"]:hover {
+    background-color: #333;
+}
+
+.modal button[type="button"] {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.modal button[type="button"]:hover {
+    background-color: #c82333;
+}
+.container {
+    display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  width: 100%;
+  box-sizing: border-box;
+  margin: auto;
+}
+
+.box {
+    position: relative;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
+    border-radius: 10px;
+    margin: 20px;
+    overflow: hidden;
+}
+
+.box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 15px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.event-name {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 20px;
+}
+
+.date {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    font-size: 14px;
+}
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="stroke">
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/organise">Organise an Event</a></li>
+          <li><a href="/myevents" class="active">My Events</a></li>
+          <li><a href="/mybookings">My Bookings</a></li>
+          <a href="/login"><button class="glow-on-hover" type="submit" formaction="/login">Log Out</button></a>          
+        </ul>
+    </nav>
+
+    <!-- Upcoming Events -->
+    <h1 style="margin-left: 45%; ">Public Events</h1>
+    <div class="cards">
+        <% if(locals.pub){ %>
+        <% for(var i=0;i<pub.length;i++){ %>
+        <div class="event-card">
+            <img src="<%=pub[i].event_poster%>">
+            <div class="event-details">
+                <h3 class="event-title"><%=pub[i].event_name%></h3>
+                <p class="event-date">Event Date: <%=pub[i].date_and_time%></p>
+                <p>Location: <%=pub[i].location%></p>
+                <p>Fee: $<%=pub[i].fee%></p>
+            </div>
+            <div class="event-stats">
+                <div class="stat-item">
+                    <i class="fas fa-eye"></i>
+                    <span><%=pub[i].no_of_views%> Views</span>
+                </div>
+                <div class="stat-item">
+                    <i class="fas fa-ticket-alt"></i>
+                    <span><%=pub[i].no_of_bookings%> Bookings</span>
+                </div>
+            </div>
+            <div class="event-actions" style="margin: auto;">
+                <button style="margin-right: 3px;" class="btn change-details" data-event-id="<%=pub[i].event_id%>">Change Details</button>
+                
+            </div>
+        </div>
+        <%}%>        
+        <%}%>        
+    </div>
+
+    <!-- Modal for Changing Details -->
+<div id="detailsModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Change Event Details</h2>
+        <form id="detailsForm" method="post" action="/updateeventdetails">
+            <input type="hidden" id="event-id" name="event_id">
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required>
+            
+            <label for="venue">Event Date:</label>
+            <input type="text" id="venue" name="date_and_time" required>
+            
+            <label for="fee">Fee:</label>
+            <input type="number" id="fee" name="fee" step="0.01" required>
+            
+            <button type="submit">Update Details</button>
+        </form>
+    </div>
+</div>
+<h1 style="margin-left: 45%; ">Private Events</h1>
+<div class="container">
+    <%for(var i=0;i<pri.length;i++){%>
+    <form action="/privateevents" method="post">
+    <button class="box">
+        <div class="content">
+            <input type="hidden" name="event_id" value=<%=pri[i].event_id%>>
+            <div class="event-name"><%=pri[i].event_name%></div>
+            <div class="date"><%=pri[i].date_and_time%></div>
+        </div>
+    </button>
+</form>
+<%}%>
+    </div>
+
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('detailsModal');
+    const closeModalButton = document.querySelector('.modal .close');
+    const detailsForm = document.getElementById('detailsForm');
+    
+    // Open modal when "Change Details" button is clicked
+    document.querySelectorAll('.btn.change-details').forEach(button => {
+        button.addEventListener('click', (event) => {
+            const eventId = event.target.getAttribute('data-event-id');
+            // Pre-fill the form with existing event details if needed
+            document.getElementById('event-id').value = eventId;
+            modal.style.display = 'block';
+        });
+    });
+
+    // Close modal
+    closeModalButton.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    // Close modal if clicked outside the modal content
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+});
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Private Event</title>
+    <link rel="stylesheet" href="private.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="stroke">
+        <ul>
+            <li><a href="/home">Home</a></li>
+            <li><a href="/organise" class="active">Organise an Event</a></li>
+            <li><a href="/myevents">My Events</a></li>
+            <li><a href="/mybookings">My Bookings</a></li>
+            <a href="/login"><button class="glow-on-hover" type="submit" formaction="/login">Log Out</button></a>
+        </ul>
+    </nav>
+    <!-- Form -->
+    <form method="post" action="/privatesubmit" enctype="multipart/form-data">
+        <h3>Enter the Details of the Event</h3>
+        <label for="event_type">Choose Event Type:</label>
+        <select id="event_type" name="event_type">
+            <option value="Marriage">Marriage</option>
+            <option value="Conference">Conference</option>
+            <option value="Birthday">Birthday Party</option>
+            <option value="Other">Other</option>
+        </select>
+        <input type="text" placeholder="Day, Date and Time" name="date_and_time">
+        <input type="text" placeholder="Venue" name="venue">
+        <input type="text" placeholder="Event Image Link" name="event_poster">
+        <label for="Your Image">Guest List</label>
+        <input type="file" name="guest_list">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Event</title>
+    <link rel="stylesheet" href="public.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="stroke">
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/organise"  class="active">Organise an Event</a></li>
+          <li><a href="/myevents">My Events</a></li>
+          <li><a href="/mybookings">My Bookings</a></li>
+          <a href="/login"><button class="glow-on-hover" type="submit" formaction="/login" >Log Out</button></a>          
+        </ul>
+    </nav>
+    
+    <form method="post" action="/publicsubmit">
+        <h3>Enter the Details of the Event</h3>
+        <input type="text" placeholder="Event Name" name="event_name" required="true">
+        <input type="text" placeholder="Event Description" name="event_description">
+        <input type="text" placeholder="Day, Date and Time" name="event_date_and_time">
+        <input type="text" placeholder="Event Type" name="event_type">
+        <input type="text" placeholder="Venue" name="event_locations">
+        <input type="text" placeholder="Fee" name="event_fee">
+        <input type="text" placeholder="Give Link of Your Poster" name="event_poster">
+        <input type="text" placeholder="Give Link of Event Host Pic" name="event_host">
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

@@ -1,0 +1,415 @@
+/* Navbar */
+nav {
+    width: 80%;
+    margin: 0 auto;
+    background: #fff;
+    padding: 3px 0;
+    
+  }
+  nav ul {
+    list-style: none;
+    text-align: center;
+  }
+  nav ul li {
+    display: inline-block;
+  }
+  nav ul li a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: #3e3c3caa;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 10px;
+  }
+  nav ul li a,
+  nav ul li a:after,
+  nav ul li a:before {
+    transition: all .5s;
+  }
+  nav ul li a:hover {
+    color: black;
+  }
+  
+  
+  /* stroke */
+  nav.stroke ul li a,
+  nav.fill ul li a {
+    position: relative;
+  }
+  nav.stroke ul li a:after,
+  nav.fill ul li a:after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 0%;
+    content: '.';
+    color: transparent;
+    background: #aaa;
+    height: 1px;
+  }
+  nav.stroke ul li a:hover:after {
+    width: 100%;
+  }
+  
+  nav.fill ul li a {
+    transition: all 2s;
+  }
+  
+  nav.fill ul li a:after {
+    text-align: left;
+    content: '.';
+    margin: 0;
+    opacity: 0;
+  }
+  nav.fill ul li a:hover {
+    color: #fff;
+    z-index: 1;
+  }
+  nav.fill ul li a:hover:after {
+    z-index: -10;
+    animation: fill 1s forwards;
+    -webkit-animation: fill 1s forwards;
+    -moz-animation: fill 1s forwards;
+    opacity: 1;
+  }
+  
+  /* Circle */
+  nav.circle ul li a {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  nav.circle ul li a:after {
+    display: block;
+    position: absolute;
+    margin: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    content: '.';
+    color: transparent;
+    width: 1px;
+    height: 1px;
+    border-radius: 50%;
+    background: transparent;
+  }
+  nav.circle ul li a:hover:after {
+    -webkit-animation: circle 1.5s ease-in forwards;
+  }
+  
+  /* SHIFT */
+  nav.shift ul li a {
+    position:relative;
+    z-index: 1;
+  }
+  nav.shift ul li a:hover {
+    color: #91640F;
+  }
+  nav.shift ul li a:after {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+    width: 100%;
+    height: 1px;
+    content: '.';
+    color: transparent;
+    background: #F1C40F;
+    visibility: none;
+    opacity: 0;
+    z-index: -1;
+  }
+  nav.shift ul li a:hover:after {
+    opacity: 1;
+    visibility: visible;
+    height: 100%;
+  }
+  .stroke ul button{
+      margin-left: 300px;
+      margin-right: 0px;
+  }
+  nav ul li a.active {
+      color: black; /* Highlight color for the active page */
+      border-bottom: 2px solid #91640F; /* Optional: underline to indicate the active page */
+    }
+    
+  /* Log Out Button */
+  .glow-on-hover {
+      width: 120px;
+      height: 45px;
+      border: none;
+      outline: none;
+      color: #fff;
+      background: #111;
+      cursor: pointer;
+      position: relative;
+      z-index: 0;
+      border-radius: 10px;
+  }
+  
+  .glow-on-hover:before {
+      content: '';
+      background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+      position: absolute;
+      top: -2px;
+      left:-2px;
+      background-size: 400%;
+      z-index: -1;
+      filter: blur(5px);
+      width: calc(100% + 4px);
+      height: calc(100% + 4px);
+      animation: glowing 20s linear infinite;
+      opacity: 0;
+      transition: opacity .3s ease-in-out;
+      border-radius: 10px;
+  }
+  
+  .glow-on-hover:active {
+      color: #000
+  }
+  
+  .glow-on-hover:active:after {
+      background: transparent;
+  }
+  
+  .glow-on-hover:hover:before {
+      opacity: 1;
+  }
+  
+  .glow-on-hover:after {
+      z-index: -1;
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background: #111;
+      left: 0;
+      top: 0;
+      border-radius: 10px;
+  }
+  
+  @keyframes glowing {
+      0% { background-position: 0 0; }
+      50% { background-position: 400% 0; }
+      100% { background-position: 0 0; }
+  }
+@import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
+  /* Ticket Cards */
+
+  .ticket_card{
+    width: 850px;
+    display: flex;
+    background-color: pink;
+    margin: auto;
+    margin-top: 30px;
+    transition: transform 0.3s ease;
+    border-radius: 50px;
+  }
+  .ticket_card:hover{
+    transform: scale(1.1);
+  }
+
+  .poster{
+    width: 250px;
+    height: 250px;
+    
+    background-size: contain;
+    font-family: "Staatliches", cursive;
+    
+  }
+  .admit{
+  position: absolute;
+	color: darkgray;
+	height: 250px;
+	padding: 0 10px;
+	letter-spacing: 0.15em;
+	display: flex;
+	text-align: center;
+	justify-content: space-around;
+	writing-mode: vertical-rl;
+	transform: rotate(-180deg);
+  font-size: x-small;
+  font-weight: 500;
+}
+
+.admit_main{
+  font-weight: 900;
+}
+ 
+.ticket_number{
+  width: 250px;
+  height: 250px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  font-size: smaller;
+}
+
+.ticket-info {
+  height: 250px;
+  width: 300px;
+	padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 30px;
+  margin-right: 30px;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	justify-content: space-between;
+	align-items: center;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.date {
+  margin: 0px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+	border-top: 1px solid gray;
+	border-bottom: 1px solid gray;
+	padding: 5px 0;
+	font-weight: 700;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+  font-size: 10px;
+  font-family: "Staatliches", cursive;
+}
+
+.date span {
+	width: 100px;
+}
+
+.date span:first-child {
+	text-align: left;
+}
+
+.date span:last-child {
+	text-align: right;
+}
+
+.date .june-29 {
+	color: #d83565;
+	font-size: 15px;
+  font-weight: 900;
+}
+
+.show-name {
+	font-size: 13px;
+	font-family: "Nanum Pen Script", cursive;
+	color: #d83565;
+}
+
+.show-name h1 {
+    font-size: 30px;
+    font-weight: 700;
+    color: #4a437e;
+    margin: 0px;
+}
+
+.show-name h2{
+  margin: 0px;
+}
+
+.time {
+	padding: 10px 0;
+	color: #4a437e;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	font-weight: 700;
+}
+.time p:first-of-type {
+  margin-top: 0;
+}
+
+.time p:last-of-type {
+  margin-top: 0;
+}
+
+
+.time span {
+	font-weight: 400;
+	color: gray;
+}
+
+.left .time {
+	font-size: 16px;
+}
+
+
+.location {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 100%;
+	padding-top: 8px;
+	border-top: 1px solid gray;
+  margin-bottom: 0px;
+  margin-top: 0px;
+}
+
+.location .separator {
+	font-size: 20px;
+}
+
+.right {
+  height: 250px;
+	width: 180px;
+	border-left: 1px dashed #404040;
+  
+}
+
+.right .admit {
+	color: darkgray;
+}
+
+.right .admit span:nth-child(2) {
+	color: gray;
+}
+
+.right .right-info-container {
+	height: 250px;
+	padding: 10px 10px 10px 35px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	align-items: center;
+  padding-left: 50px;
+}
+
+.right .show-name h1 {
+	font-size: 18px;
+}
+
+.barcode {
+	height: 100px;
+}
+
+.barcode img {
+	height: 100%;
+}
+
+.right .ticket-number {
+	color: gray;
+  margin-top: 6px;
+}
+
+.right .time{
+  padding-top: 5px;
+  padding-bottom: 0px;
+}
+
+.right .time p{
+  margin-top:0px;
+  margin-bottom: 0px;
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stripe Payment Demo</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            display: flex;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 1200px;
+            overflow: hidden;
+        }
+        .event-info, .payment-form {
+            padding: 20px;
+            flex: 1;
+        }
+        .event-info {
+            background: #009688;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            padding: 30px;
+        }
+        .event-info h3 {
+            margin: 0 0 15px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+        .event-info p {
+            margin: 10px 0;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .payment-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #ffffff;
+        }
+        .payment-form img {
+            width: 100%;
+            max-width: 500px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="event-info">
+            <h3>Event Details</h3>
+            <p><strong>Venue:</strong> <%=event.location%></p>
+            <p><strong>Date and Time:</strong> <%=event.date_and_time%></p>
+            <p><strong>Fee: </strong>$<%=event.fee%></p>
+        </div>
+        <div class="payment-form">
+            <img src="<%=event.event_poster%>" alt="Event Image">
+            <form action="payment" method="post">
+                <input type="hidden" name="event" value="<%=event.event_id%>">
+                <script
+                    src="//checkout.stripe.com/v2/checkout.js"
+                    class="stripe-button"
+                    data-key="<%= key %>"
+                    data-amount="<%=event.fee%>"
+                    data-currency="usd"
+                    data-name="<%=user_name%>"
+                    data-description="<%=event.event_name%>"
+                    data-locale="auto">
+                </script>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

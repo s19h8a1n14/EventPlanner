@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bookings</title>
+    <link rel="stylesheet" href="mybookings.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="stroke">
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/organise">Organise an Event</a></li>
+          <li><a href="/myevents">My Events</a></li>
+          <li><a href="/mybookings"  class="active">My Bookings</a></li>
+          <a href="/login"><button class="glow-on-hover" type="submit" formaction="/login" >Log Out</button></a>          
+        </ul>
+    </nav>
+    <!-- Tickets -->
+<% if(locals.arr){ %>
+<% for(var i=0;i<arr.length;i++){ %>
+<div class="ticket_card">
+    <div style="background-image: url('<%= arr[i].event_poster %>');" class="poster">
+        <div class="admit">
+            <span>ADMIT ONE</span>
+            <span class="admit_main">ADMIT ONE</span>
+            <span>ADMIT ONE</span>
+        </div>
+        <div class="ticket_number">
+            <p>#1234567</p>
+        </div>
+ </div>
+ <div class="ticket-info">
+    <p class="date">
+        <span>TUESDAY</span>
+        <span class="june-29">JUNE 29</span>
+        <span>2021</span>
+    </p>
+    <div class="show-name">
+        <h1><%=arr[i].event_name%></h1>
+        <h2>Olivia Rodrigo</h2>
+    </div>
+    <div class="time">
+        <p>8:00 PM <span>TO</span> 11:00 PM</p>
+        <p>DOORS <span>@</span> 7:00 PM</p>
+    </div>
+    <p class="location"><span>East High School</span>
+        <span class="separator"><i class="far fa-smile"></i></span><span><%=arr[i].location%></span>
+    </p>
+</div>
+<div class="right">
+    <div class="admit">
+        <span>ADMIT ONE</span>
+        <span class="admit_main">ADMIT ONE</span>
+        <span>ADMIT ONE</span>
+    </div>
+    <div class="right-info-container">
+        <div class="show-name">
+            <h1><%=arr[i].event_name%></h1>
+        </div>
+        <div class="time">
+            <p>8:00 PM <span>TO</span> 11:00 PM</p>
+            <p>DOORS <span>@</span> 7:00 PM</p>
+        </div>
+        <div class="barcode">
+            <img src="https://external-preview.redd.it/cg8k976AV52mDvDb5jDVJABPrSZ3tpi1aXhPjgcDTbw.png?auto=webp&s=1c205ba303c1fa0370b813ea83b9e1bddb7215eb" alt="QR code">
+        </div>
+        <p class="ticket-number">
+            #1234567
+        </p>
+    </div>
+</div>
+</div>
+<%}%>
+<%}%>
+</div></body>
+</html>
