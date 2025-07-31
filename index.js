@@ -51,11 +51,11 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 app.get("/", (req, res) => {
-    res.render("login.ejs");
+    res.render("auth/login.ejs");
 });
 
 app.get("/login", (req, res) => {
-    res.render("login.ejs");
+    res.render("auth/login.ejs");
 });
 
 app.get("/register", (req, res) => {
@@ -67,20 +67,20 @@ app.get("/home", async(req, res)=>{
         var p='public';
         const result = await db.query("SELECT * FROM eventsinfo WHERE private_public = $1 order by event_id asc", [p]);    
         var arr = result.rows;
-        res.render("home.ejs", {event: arr});
+        res.render("user/home.ejs", {event: arr});
     }
     else{
-        res.render("logintoview.ejs");
+        res.render("auth/logintoview.ejs");
     }
     
 });
 
 app.get("/organise", (req, res)=>{
     if(isLogged){
-        res.render("organise.ejs");
+        res.render("events/organise.ejs");
     }
     else{
-        res.render("logintoview.ejs")
+        res.render("auth/logintoview.ejs")
     }
 });
 
@@ -89,15 +89,15 @@ app.get("/myevents", async(req, res)=>{
     var p='private';
     const result = await db.query("select * from eventsinfo where private_public = $1 and user_id = $2;", [pu, u_id]);
     const result1 = await db.query("select * from eventsinfo where private_public = $1 and user_id = $2;",[p, u_id]);
-    res.render("myevents.ejs",{pub: result.rows, pri: result1.rows});
+    res.render("user/myevents.ejs",{pub: result.rows, pri: result1.rows});
 });
 
 app.get("/public", (req, res)=>{
-    res.render("public.ejs");
+    res.render("events/public.ejs");
 });
 
 app.get("/private", (req, res)=>{
-    res.render("private.ejs");
+    res.render("events/private.ejs");
 });
 
 app.get("/mybookings", async(req, res)=>{
@@ -109,10 +109,10 @@ app.get("/mybookings", async(req, res)=>{
         var result2 = await db.query("select * from eventsinfo where event_id = $1", [e_id]);
         arr.push(result2.rows[0]);
     }
-    res.render("mybookings.ejs", {arr:arr});
+    res.render("bookings/mybookings.ejs", {arr:arr});
     }
     else{
-        res.render('logintoview.ejs')
+        res.render('auth/logintoview.ejs')
     }
     
 });
@@ -130,10 +130,10 @@ app.post("/login", async(req, res)=>{
             res.redirect("/home");
         }
         else{
-            res.render("login_wrongpass.ejs");
+            res.render("auth/login_wrongpass.ejs");
         }
     } catch (error) {
-        res.render("login_nouser.ejs");
+        res.render("auth/login_nouser.ejs");
     }
 });
 
@@ -160,10 +160,10 @@ app.post("/readMore", async (req, res)=>{
         const result = await db.query("update eventsinfo set no_of_views=no_of_views+1 where event_id = $1 ", [id]);
         const result1 = await db.query("select * from eventsinfo where event_id = $1", [id]);
         var readMoreArr = result1.rows[0];
-        res.render("readmore.ejs", {event: readMoreArr});
+        res.render("events/readmore.ejs", {event: readMoreArr});
     }
     else{
-        res.render("logintoview.ejs");
+        res.render("auth/logintoview.ejs");
     }
 });
 
@@ -171,7 +171,7 @@ app.post("/bookTickets",async(req, res)=>{
     var event_id = req.body.id;
     var result1 = await db.query("select * from eventsinfo where event_id = $1", [event_id]);
     var result2 = await db.query("select * from userinfo where user_id = $1", [u_id]);
-    res.render('paymentshome.ejs', {
+    res.render('bookings/paymentshome.ejs', {
         key: PUBLISHABLE_KEY, event: result1.rows[0], user_name: result2.rows[0].user_name
     });
 });
@@ -254,7 +254,7 @@ app.post('/privateevents',async(req, res)=>{
     console.log(data);
     var result = await db.query("select * from eventsinfo where event_id = $1", [data.event_id]);
     console.log(result);
-    res.render('privateevents.ejs', {event: result.rows[0]});
+    res.render('events/privateevents.ejs', {event: result.rows[0]});
 });
 
 app.post('/guestlist', async(req, res)=>{
@@ -262,7 +262,7 @@ app.post('/guestlist', async(req, res)=>{
     var result1 = await db.query("select * from guestlistinfo where event_id = $1", [data.id]);
     console.log(result1);
     console.log(data);
-    res.render('guestlist.ejs', {guest: result1.rows});
+    res.render('events/guestlist.ejs', {guest: result1.rows});
 });
 
 app.post('/addnewguest', async(req, res)=>{
@@ -271,7 +271,7 @@ app.post('/addnewguest', async(req, res)=>{
     console.log(data.guest_name);
     var result = await db.query("insert into guestlistinfo (user_id, event_id, guest_email, guest_name) values ($1, $2, $3, $4);", [u_id, data.event_id,data.guest_email, data.guest_name]);
     var result1 = await db.query("select * from guestlistinfo where event_id = $1", [data.event_id]);
-    res.render('guestlist.ejs', {guest: result1.rows});
+    res.render('events/guestlist.ejs', {guest: result1.rows});
 })
 
 app.listen(port, () => {
