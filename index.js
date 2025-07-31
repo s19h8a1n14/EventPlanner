@@ -59,7 +59,7 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/register", (req, res) => {
-    res.render("register.ejs");
+    res.render("auth/register.ejs");
 });
 
 app.get("/home", async(req, res)=>{
@@ -143,7 +143,7 @@ app.post("/register", async(req, res)=>{
     var password = req.body.pass;
     var result1=await db.query("select * from userinfo where email_id=$1", [email]);
     if(result1.rowCount>0){
-        res.render("registerlogin.ejs");
+        res.render("auth/registerlogin.ejs");
     }
     else{
         var result = await db.query("insert into userinfo (email_id, user_name, user_password) values ($1, $2, $3)", [email, username, password]);
